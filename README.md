@@ -3,29 +3,53 @@
 Personal research page — a single static `index.html` with CSS inlined and no
 build step. Served by GitHub Pages at <https://sanketbhat419.github.io>.
 
-Publications, patents, and talks are already populated from the CV. Three things
-remain.
+The page is complete: photo, bio, and three journal articles with verified DOIs.
 
 ---
 
-## 1. Remaining TODOs
+## 1. Editing the page
 
-Both are marked `TODO` in `index.html`:
+Everything lives in `index.html`. Colours and page width are the `:root`
+variables at the top of `<style>`; content follows in two blocks, `HERO` and
+`PUBLICATIONS`.
 
-1. **Photo** — save a square crop (~600×600) as `photo.jpg` next to
-   `index.html`. Until then the avatar shows as an empty circle.
-2. **Bio** — replace the `SHORT BIO GOES HERE` paragraph with 2–3 sentences in
-   your own voice.
-3. **CV** *(optional)* — save as `cv.pdf` next to `index.html`, or delete the
-   `CV` link from the `.links` nav.
+### Adding a publication
 
-Check nothing was missed:
+Copy this block into `<ol class="pubs">`. Numbering is automatic. Drop the
+`pub-links` or `pub-note` lines if unused.
 
-```bash
-grep -n 'TODO\|SHORT BIO' index.html
+```html
+<li class="pub">
+  <span class="pub-title">PAPER TITLE</span>
+  <span class="pub-authors">A. Author, <b>S. Bhat</b>, C. Author</span>
+  <span class="pub-venue">VENUE, Vol. 00(0), 000–000, YEAR</span>
+  <span class="pub-links">
+    <a href="https://doi.org/DOI">DOI</a>
+  </span>
+  <span class="pub-note">AWARD OR PRESS MENTION</span>
+</li>
 ```
 
-### Optional: attach paper PDFs
+To group papers by type again, add `<h3>Journal Articles</h3>`-style headings
+before each `<ol class="pubs">`; the CSS already supports them and restarts
+numbering per list. Conference papers, working papers, patents, and talks were
+removed by request — recover the markup with `git show 7251083:index.html`.
+
+### Replacing the photo
+
+Overwrite `photo.jpg` with a square crop (currently 600×600). Filenames are
+case-sensitive on GitHub's servers.
+
+### Restoring the CV or email link
+
+Both were removed by request. To bring back, add inside `<nav class="links">`:
+
+```html
+<a href="cv.pdf">CV</a>
+<a href="mailto:you@example.com">Email</a>
+```
+
+### Attaching paper PDFs
 
 Drop files into `papers/` and add a link inside that paper's `pub-links`:
 
@@ -38,20 +62,6 @@ Drop files into `papers/` and add a link inside that paper's `pub-links`:
 > manuscript* after an embargo, not the typeset version. When in doubt, the DOI
 > link alone is always safe.
 
-### Adding a future publication
-
-Copy this block into the relevant `<ol class="pubs">`. Numbering is automatic.
-
-```html
-<li class="pub">
-  <span class="pub-title">PAPER TITLE</span>
-  <span class="pub-authors">A. Author, <b>S. Bhat</b>, C. Author</span>
-  <span class="pub-venue">VENUE, Vol. 00(0), 000–000, YEAR</span>
-  <span class="pub-links">
-    <a href="https://doi.org/DOI">DOI</a>
-  </span>
-</li>
-```
 
 ### Publication entry snippet
 
